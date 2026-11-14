@@ -1,0 +1,12 @@
+# ละเว้น Virtual Environment, แคช และข้อมูลฝึกสอนขนาดใหญ่ที่ไม่จำเป็นต่อการรัน API
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+data/
+*.log
+.env*
+start_backend.bat
+

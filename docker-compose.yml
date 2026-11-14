@@ -1,0 +1,27 @@
+# ไฟล์ Docker Compose สำหรับรันระบบ SPU SKYE (PM2.5 Sentinel) ทั้งฝั่ง Backend และ Frontend พร้อมกัน
+services:
+  # บริการ FastAPI + โมเดล ML พยากรณ์ PM2.5 (.joblib)
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: spu-skye-backend
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # บริการหน้าเว็บ Next.js (Static Export) เสิร์ฟผ่าน Nginx
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        # ระบุ URL ที่เบราว์เซอร์ของผู้ใช้งานจะใช้เรียก Backend Container บนเครื่อง
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+    container_name: spu-skye-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+

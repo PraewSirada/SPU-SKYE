@@ -1,0 +1,8 @@
+# ละเว้นไฟล์ Dependency และไฟล์ Build เก่าบนเครื่องเพื่อลดขนาด Build Context
+node_modules/
+.next/
+out/
+.git/
+*.log
+.env*.local
+
